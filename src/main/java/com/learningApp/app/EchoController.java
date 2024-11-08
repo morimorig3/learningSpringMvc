@@ -1,7 +1,10 @@
 package com.learningApp.app;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -16,8 +19,11 @@ public class EchoController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String echo(EchoForm form) {
+	public String echo(@Valid EchoForm form, BindingResult result) {
 		// 引数で受け取ったformは自動的にmodelに追加される
+		if(result.hasErrors()) {
+			return "echo/input";
+		}
 		return "echo/output";
 	}
 }
