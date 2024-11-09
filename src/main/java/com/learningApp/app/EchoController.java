@@ -1,5 +1,7 @@
 package com.learningApp.app;
 
+import java.util.Locale;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -11,14 +13,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("echo")
 public class EchoController {
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public String viewInput(Model model) {
+	@GetMapping
+	public String viewInput(Model model, Locale locale) {
 		EchoForm form = new EchoForm();
 		model.addAttribute(form); // model名を入力しない場合はクラス名になる echoForm
+		model.addAttribute("locale" ,locale.toString());
 		return "echo/input";
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public String echo(@Valid EchoForm form, BindingResult result) {
 		// 引数で受け取ったformは自動的にmodelに追加される
 		if(result.hasErrors()) {

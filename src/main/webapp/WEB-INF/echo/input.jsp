@@ -1,6 +1,7 @@
 <html>
 <body>
 <h2>入力画面</h2>
+<p>${locale}</p>
 <form:form modelAttribute="echoForm">
 	<div>テキストを入力してください：</div>
 	<div>
