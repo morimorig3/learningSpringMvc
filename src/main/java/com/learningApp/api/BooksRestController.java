@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.learningApp.domain.service.BookService;
@@ -56,11 +58,10 @@ public class BooksRestController {
 		
 		BookResource createdBookResource = bookService.create(newBook);
 		
-		URI resourceUri = uriComponentsBuilder
-				.path("books/{bookId}")
-				.buildAndExpand(createdBookResource.getBookId())
-				.encode()
-				.toUri();
+		URI resourceUri = MvcUriComponentsBuilder.relativeTo(uriComponentsBuilder)
+				.withMethodCall(
+						MvcUriComponentsBuilder.on(BooksRestController.class).getBook(createdBookResource.getBookId())
+						).build().encode().toUri();
 		
 		return ResponseEntity.created(resourceUri).build();
 	}
