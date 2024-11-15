@@ -30,5 +30,13 @@
 	</div>
 	<form:button>確認</form:button>
 </form:form>
+<div>
+<p>セッション確認</p>
+<p><c:out value="${accountCreateForm.name}" />さん</span></p>
+<p><c:out value="${accountCreateForm.tel}" /></span></p>
+<p><c:out value="${accountCreateForm.dateOfBirth}" /></span></p>
+<p><c:out value="${accountCreateForm.email}" /></span></p>
+<p><c:out value="${accountCreateForm.sessionTestValueString}" /></span></p>
+</div>
 </body>
 </html>

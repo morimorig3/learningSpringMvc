@@ -28,7 +28,16 @@ public class AccountCreateForm implements Serializable{
 	@Size(min = 9, max = 250)
 	private String email;
 	
-
+	@NotNull
+	@Size(min = 1, max = 30)
+	private String sessionTestValueString = "sessionValue";
+	public String getSessionTestValueString() {
+		return sessionTestValueString;
+	}
+	public void setSessionTestValueString(String sessionTestValueString) {
+		this.sessionTestValueString = sessionTestValueString;
+	}
+	
 	public String getName() {
 		return this.name;
 	}

@@ -13,10 +13,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping("account")
+@SessionAttributes(types = AccountCreateForm.class)
 public class AccountController {
+	
+	@ModelAttribute("accountCreateForm")
+	public AccountCreateForm setUpAccountCreateForm() {
+		return new AccountCreateForm();
+	}
 
 	@RequestMapping(path = "{accountId}", method = RequestMethod.GET)
 	public String showAccount(
@@ -26,22 +34,18 @@ public class AccountController {
 		return "account/index";
 	}
 	
-	
-	@ModelAttribute
-	public AccountCreateForm setUpForm() {
-	return new AccountCreateForm();	
-	}
-	
 	@GetMapping("createForm")
-	public String form(Model model) {
+	public String form() {
 		return "account/createForm";
 	}
 	
 	@RequestMapping(path = "createForm", method = RequestMethod.POST, params = "confirm")
-	public String postForm(@Validated AccountCreateForm form, BindingResult result, Model model) {
+	public String postForm(@Validated AccountCreateForm form, BindingResult result, SessionStatus sessionStatus) {
 		if (result.hasErrors()) {
 			return "account/createForm";
 		}
+		// セッション情報削除
+		sessionStatus.setComplete();
 		return "account/createResult";
 	}
 }

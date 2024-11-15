@@ -12,6 +12,7 @@
 <p><c:out value="${accountCreateForm.tel}" /></span></p>
 <p><c:out value="${accountCreateForm.dateOfBirth}" /></span></p>
 <p><c:out value="${accountCreateForm.email}" /></span></p>
+<p><c:out value="${accountCreateForm.sessionTestValueString}" /></span></p>
 <p><a href="<c:url value='/' />">トップへ</a></p>
 </body>
 </html>
